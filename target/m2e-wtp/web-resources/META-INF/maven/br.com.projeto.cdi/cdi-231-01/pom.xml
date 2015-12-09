@@ -6,6 +6,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+	<properties>
+        <deployFolder>/home/aea-note1/ambiente/apache-tomcat-7.0.62/webapps/</deployFolder>
+    </properties>
+
 	<dependencies>
 		<!-- Weld (implementação do CDI) -->
 		<dependency>
@@ -30,6 +34,15 @@
 		</dependency>
 	</dependencies>
 
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -40,16 +53,34 @@
 					<target>1.7</target>
 				</configuration>
 			</plugin>
+
+			<!--
+			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-war-plugin</artifactId>
+	            <version>2.3</version>
+	            <configuration>
+		            <warName>meu-projeto-01</warName>
+		            <outputDirectory>/home/aea-note1/ambiente/apache-tomcat-7.0.62/webapps/</outputDirectory>
+	            </configuration>
+        	</plugin>
+        	-->
+        	
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<server>TomcatServer7</server>
+					<path>/meu-projeto</path>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
-	<repositories>
-		<repository>
-			<id>prime-repo</id>
-			<name>PrimeFaces Maven Repository</name>
-			<url>http://repository.primefaces.org</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
-
 </project>
+
+<!--
+	http://www.disasterarea.co.uk/blog/deploying-to-tomcat-7-with-maven/
+-->
